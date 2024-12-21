@@ -7,7 +7,7 @@ import Signin from "./components/Signin";
 
 function App() {
   const contextData = useContext(LogContext);
-  console.log(contextData?.loggedIn);
+
   return (
     <>
       {!contextData?.loggedIn ? (

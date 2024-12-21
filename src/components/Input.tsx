@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { LogContext } from "./LogContext";
 
 const Input = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [data, setData] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const contextData = useContext(LogContext);
   function submitHandler(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
     if (inputValue === "") return;
@@ -14,7 +16,10 @@ const Input = () => {
         {
           headers: { "content-type": "application/json" },
           method: "POST",
-          body: JSON.stringify({ prompt: prompt }),
+          body: JSON.stringify({
+            prompt: prompt,
+            token: contextData?.authToken,
+          }),
         }
       );
       const newData: string = await response.text();

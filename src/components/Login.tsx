@@ -5,7 +5,6 @@ const Login = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const contextData = useContext(LogContext);
-  console.log(contextData);
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     async function sendLogin(): Promise<void> {
@@ -24,8 +23,9 @@ const Login = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data: string = await response.text();
+        const data: { token: string } = await response.json();
         contextData?.setLoggedIn(true);
+        contextData?.setAuthToken(data.token);
       } catch (error) {
         console.error(error);
       }
