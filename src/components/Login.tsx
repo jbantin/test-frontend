@@ -39,14 +39,17 @@ const Login = () => {
     <div>
       {/* <div className="absolute w-48 bg-black left-1/3 top-[10%] h-48 rounded-full"></div>
       <div className="absolute w-48 bg-black right-1/3 top-[30%] h-48 rounded-full"></div> */}
-      <div className="z-20 rounded-xl w-[500px] absolute translate-x-[-50%] translate-y-[20%]  left-1/2  mt-2 text-xl font-semibold p-12 bg-[rgba(255,255,255,0.13)] backdrop-blur ">
-        <form onSubmit={submitHandler} className="flex flex-col gap-3">
+      <div className="z-20 w-full h-full absolute  mt-2 text-xl font-semibold p-12 bg-[rgba(255,255,255,0.13)] ] shadow-2xl backdrop-blur">
+        <form
+          onSubmit={submitHandler}
+          className="flex flex-col gap-3 w-[520px] m-auto mt-16 backdrop-blur rounded-lg border-[rgba(255,255,255,0.1)] border-2 shadow-2xl p-16"
+        >
           <h3 className="ml-auto mr-auto text-4xl text-white">Login</h3>
           <label className="mt-8 text-white" htmlFor="email">
             Email
           </label>
           <input
-            className="border-solid border w-full p-2 rounded-md outline-none"
+            className="border-solid border w-full p-2 rounded-md outline-none bg-white"
             type="email"
             value={emailValue}
             onChange={(e) => setEmailValue(e.target.value)}
@@ -62,7 +65,7 @@ const Login = () => {
             onChange={(e) => setPasswordValue(e.target.value)}
             placeholder="password"
             id="password"
-            className="border-solid border w-full p-2 rounded-md outline-none"
+            className="border-solid border w-full p-2 rounded-md outline-none bg-white"
           />
           <button
             className="  p-5 mt-8 bg-black text-white rounded-lg hover:bg-slate-300 hover:text-black"
