@@ -11,10 +11,7 @@ function App() {
   return (
     <>
       {!contextData?.loggedIn ? (
-        <div>
-          <Login />
-          {/* <Signin /> */}
-        </div>
+        <div>{contextData?.signingIn ? <Signin /> : <Login />}</div>
       ) : (
         <></>
       )}

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { LogContext } from "./LogContext";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const Login = () => {
   const [emailValue, setEmailValue] = useState("");
@@ -9,23 +10,21 @@ const Login = () => {
     e.preventDefault();
     async function sendLogin(): Promise<void> {
       try {
-        const response = await fetch(
-          "https://express-backend-delta.vercel.app/login",
-          {
-            headers: { "content-type": "application/json" },
-            method: "POST",
-            body: JSON.stringify({
-              email: emailValue,
-              password: passwordValue,
-            }),
-          }
-        );
+        const response = await fetch(`${backendUrl}/login`, {
+          headers: { "content-type": "application/json" },
+          method: "POST",
+          body: JSON.stringify({
+            email: emailValue,
+            password: passwordValue,
+          }),
+        });
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data: { token: string } = await response.json();
+        const data: { token: string; name: string } = await response.json();
         contextData?.setLoggedIn(true);
         contextData?.setAuthToken(data.token);
+        console.log(data.name);
       } catch (error) {
         console.error(error);
       }
@@ -72,6 +71,12 @@ const Login = () => {
             type="submit"
           >
             Log in
+          </button>
+          <button
+            onClick={() => contextData?.setSigningIn(true)}
+            className="block w-28 rounded-lg text-white hover:text-black hover:bg-xclr4 mr-0 ml-auto"
+          >
+            ...or signIn.
           </button>
         </form>
       </div>
