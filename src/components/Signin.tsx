@@ -17,6 +17,7 @@ const Signin = () => {
     e.preventDefault();
     console.log("verify");
     const verifyPin = async () => {
+      console.log(`${backendUrl}/email_verification/verify`);
       try {
         const response = await fetch(
           `${backendUrl}/email_verification/verify`,
@@ -31,7 +32,8 @@ const Signin = () => {
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
-        }
+          }
+
       } catch (error) {
         console.log("fehler:", error);
         console.error(error);

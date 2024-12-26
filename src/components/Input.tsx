@@ -31,18 +31,18 @@ const Input = () => {
   }
   return (
     <>
-      <div className="w-full h-screen bg-black px-32">
-        <div className="max-w-6xl mx-auto">
+      <div className="w-full h-screen bg-black px-2 sm:px-12 md:px-24 xl:px-48">
+        <div className=" mx-auto">
           <h1 className="text-4xl font-bold py-4 text-white">AskOhMatic</h1>
         </div>
 
         <form
           onSubmit={submitHandler}
-          className="form max-w-6xl mx-auto flex flex-col bg-black rounded-md "
+          className="form w-full  mx-auto flex flex-col bg-black rounded-md"
         >
-          <h2 className="text-2xl font-bold m-2 text-white"> Enter Question</h2>
+          <h2 className="text-2xl font-bold text-white"> Enter Question</h2>
           <input
-            className="w-[80%] rounded-md p-3 mt-1 ml-2 bg-xclr1 text-white"
+            className="w-[80%] rounded-md p-3 mt-1  bg-xclr1 text-white"
             type="text"
             id="inputText"
             value={inputValue}
@@ -53,12 +53,12 @@ const Input = () => {
           />
           <button
             type="submit"
-            className="rounded-md m-2 mt-4 mb-2 w-32 h-12 bg-xclr5 hover:bg-xclr3 text-black hover:text-xclr5 text-xl font-bold"
+            className="rounded-md mt-4 mb-2 w-32 h-12 bg-xclr5 hover:bg-xclr3 text-black hover:text-xclr5 text-xl font-bold"
           >
             submit
           </button>
         </form>
-        <div className="mx-auto h-3/5 max-w-6xl bg-xclr2 text-white mt-2 rounded-lg p-4">
+        <div className="mx-auto h-3/5  bg-xclr2 text-white mt-2 rounded-lg p-4 overflow-auto">
           {loading ? <h2>loading...</h2> : <></>}
           {data ? <h3>{data}</h3> : <></>}
         </div>
