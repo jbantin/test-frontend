@@ -14,6 +14,7 @@ export const LogContext = createContext<
       signingIn: boolean;
       setSigningIn: Dispatch<SetStateAction<boolean>>;
       userName: string;
+      setUserName: Dispatch<SetStateAction<string>>;
       userEmail: string;
     }
   | undefined
@@ -23,7 +24,7 @@ export function LogContextProvider({ children }: React.PropsWithChildren<{}>) {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [authToken, setAuthToken] = useState("");
   const [signingIn, setSigningIn] = useState(false);
-  const userName = "otto";
+  const [userName, setUserName] = useState("");
   const userEmail = "xxx@xxx.dev";
   const value = {
     loggedIn,
@@ -33,6 +34,7 @@ export function LogContextProvider({ children }: React.PropsWithChildren<{}>) {
     signingIn,
     setSigningIn,
     userName,
+    setUserName,
     userEmail,
   };
 

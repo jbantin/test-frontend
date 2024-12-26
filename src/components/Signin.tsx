@@ -4,7 +4,6 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const Signin = () => {
   const contextData = useContext(LogContext);
-  console.log(contextData?.userEmail, contextData?.userName);
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [password2Value, setPassword2Value] = useState("");
@@ -15,25 +14,36 @@ const Signin = () => {
 
   const submitPinHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("verify");
+
     const verifyPin = async () => {
-      console.log(`${backendUrl}/email_verification/verify`);
       try {
-        const response = await fetch(
-          `${backendUrl}/email_verification/verify`,
-          {
-            headers: { "content-type": "application/json" },
-            method: "POST",
-            body: JSON.stringify({
-              email: contextData?.userEmail,
-              otp: pinValue,
-            }),
-          }
-        );
+        let response = await fetch(`${backendUrl}/email_verification/verify`, {
+          headers: { "content-type": "application/json" },
+          method: "POST",
+          body: JSON.stringify({
+            email: contextData?.userEmail,
+            otp: pinValue,
+          }),
+        });
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
+        }
+        //login new user
+        response = await fetch(`${backendUrl}/login`, {
+          headers: { "content-type": "application/json" },
+          method: "POST",
+          body: JSON.stringify({
+            email: contextData?.userEmail,
+            password: passwordValue,
+          }),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data: { token: string; name: string } = await response.json();
+        contextData?.setLoggedIn(true);
+        contextData?.setAuthToken(data.token);
+        contextData?.setUserName(data.name);
       } catch (error) {
         console.log("fehler:", error);
         console.error(error);
@@ -65,10 +75,9 @@ const Signin = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
           return;
         }
-        const data: { name: string } = await response.json();
+        // const data: { name: string } = await response.json();
         setIsfetching(false);
         setVerify(true);
-        console.log(data.name);
       } catch (error) {
         console.log("fehler:", error);
         console.error(error);

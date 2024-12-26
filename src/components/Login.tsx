@@ -24,7 +24,7 @@ const Login = () => {
         const data: { token: string; name: string } = await response.json();
         contextData?.setLoggedIn(true);
         contextData?.setAuthToken(data.token);
-        console.log(data.name);
+        contextData?.setUserName(data.name);
       } catch (error) {
         console.error(error);
       }

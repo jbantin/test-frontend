@@ -6,6 +6,7 @@ const Input = () => {
   const [data, setData] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const contextData = useContext(LogContext);
+
   function submitHandler(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
     if (inputValue === "") return;
@@ -31,9 +32,12 @@ const Input = () => {
   }
   return (
     <>
-      <div className="w-full h-screen bg-black px-2 sm:px-12 md:px-24 xl:px-48">
-        <div className=" mx-auto">
-          <h1 className="text-4xl font-bold py-4 text-white">AskOhMatic</h1>
+      <div className=" w-full h-screen bg-black px-2 sm:px-12 md:px-24 xl:px-48">
+        <div className="text-1xl sm:text-2xl md:text-3xl xl:text-4xl flex justify-between">
+          <h1 className="font-bold py-4 text-white">AskOhMatic</h1>
+          <h1 className="font-bold py-4 text-white">
+            Hey {contextData?.userName}
+          </h1>
         </div>
 
         <form
@@ -49,7 +53,7 @@ const Input = () => {
             onChange={(e) => {
               setInputValue(e.target.value);
             }}
-            placeholder="ask somethng"
+            placeholder="ask something"
           />
           <button
             type="submit"
@@ -58,7 +62,7 @@ const Input = () => {
             submit
           </button>
         </form>
-        <div className="mx-auto h-3/5  bg-xclr2 text-white mt-2 rounded-lg p-4 overflow-auto">
+        <div className="mx-auto h-3/4  bg-xclr2 text-white mt-2 rounded-lg p-4 overflow-auto">
           {loading ? <h2>loading...</h2> : <></>}
           {data ? <h3>{data}</h3> : <></>}
         </div>
