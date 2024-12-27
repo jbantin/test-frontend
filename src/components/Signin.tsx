@@ -11,6 +11,7 @@ const Signin = () => {
   const [isFetching, setIsfetching] = useState(false);
   const [verify, setVerify] = useState(false);
   const [pinValue, setPinValue] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const submitPinHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,7 +27,7 @@ const Signin = () => {
           }),
         });
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error! status: ${await response.text()}`);
         }
         //login new user
         response = await fetch(`${backendUrl}/login`, {
@@ -38,14 +39,14 @@ const Signin = () => {
           }),
         });
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`${await response.text()}`);
         }
         const data: { token: string; name: string } = await response.json();
         contextData?.setLoggedIn(true);
         contextData?.setAuthToken(data.token);
         contextData?.setUserName(data.name);
       } catch (error) {
-        console.log("fehler:", error);
+        setErrorMsg(String(error));
         console.error(error);
       }
     };
@@ -72,15 +73,14 @@ const Signin = () => {
           }),
         });
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error! status: ${await response.text()}`);
           return;
         }
         // const data: { name: string } = await response.json();
         setIsfetching(false);
         setVerify(true);
       } catch (error) {
-        console.log("fehler:", error);
-        console.error(error);
+        setErrorMsg(String(error));
         setIsfetching(false);
       }
     };
@@ -114,6 +114,7 @@ const Signin = () => {
               >
                 submit
               </button>
+              <p className="text-xs text-red-500">{errorMsg}</p>
             </h1>
           </form>
         ) : (
@@ -183,6 +184,7 @@ const Signin = () => {
                 Sign in
               </button>
             )}
+            <p className="text-xs text-red-500">{errorMsg}</p>
           </form>
         )}
       </div>

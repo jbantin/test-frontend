@@ -5,6 +5,7 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const Login = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const contextData = useContext(LogContext);
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,14 +20,14 @@ const Login = () => {
           }),
         });
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`${await response.text()}`);
         }
         const data: { token: string; name: string } = await response.json();
         contextData?.setLoggedIn(true);
         contextData?.setAuthToken(data.token);
         contextData?.setUserName(data.name);
       } catch (error) {
-        console.error(error);
+        setErrorMsg(String(error));
       }
 
       return;
@@ -72,6 +73,7 @@ const Login = () => {
           >
             Log in
           </button>
+          <p className="text-xs text-red-500">{errorMsg}</p>
           <button
             onClick={() => contextData?.setSigningIn(true)}
             className="block w-28 rounded-lg text-white hover:text-black hover:bg-xclr4 mr-0 ml-auto"
