@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { LogContext } from "./LogContext";
-
+import ReactMarkdown from "react-markdown";
 const Input = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [data, setData] = useState<string | null>(null);
@@ -64,7 +64,7 @@ const Input = () => {
         </form>
         <div className="mx-auto h-3/4  bg-xclr2 text-white mt-2 rounded-lg p-4 overflow-auto">
           {loading ? <h2>loading...</h2> : <></>}
-          {data ? <h3>{data}</h3> : <></>}
+          {data ? <ReactMarkdown>{data}</ReactMarkdown> : <></>}
         </div>
       </div>
     </>
