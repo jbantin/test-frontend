@@ -4,7 +4,6 @@ import ReactMarkdown from "react-markdown";
 
 const Input = () => {
   const [inputValue, setInputValue] = useState<string>("");
-  const [data, setData] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const contextData = useContext(LogContext);
 
@@ -25,8 +24,24 @@ const Input = () => {
         }
       );
       const newData: string = await response.text();
-      setData(newData);
-      setLoading(false);
+
+      const newChatDate = {
+        q: inputValue,
+        a: newData,
+      };
+      contextData?.userChatData.push(newChatDate);
+      await fetch(
+        "https://express-backend-delta.vercel.app/update_data",
+        {
+          headers: { "content-type": "application/json" },
+          method: "POST",
+          body: JSON.stringify({
+            data: contextData?.userChatData,
+            token: contextData?.authToken,
+          }),
+        }
+      );
+          setLoading(false);
     };
     fetchPrompt(inputValue);
     return;
@@ -47,7 +62,7 @@ const Input = () => {
         >
           <h2 className="text-2xl font-bold text-white"> Enter Question</h2>
           <input
-            className="w-[80%] rounded-md p-3 mt-1  bg-xclr1 text-white"
+            className="w-[80%] rounded-md p-3 mt-1  bg-xclr4 text-black focus:outline-none"
             type="text"
             id="inputText"
             value={inputValue}
@@ -56,21 +71,25 @@ const Input = () => {
             }}
             placeholder="ask something"
           />
-          <button
+          {loading?<button className="rounded-md mt-4 mb-2 w-32 h-12 bg-xclr5 text-black text-xl font-bold">Loading...</button>:<button
             type="submit"
-            className="rounded-md mt-4 mb-2 w-32 h-12 bg-xclr5 hover:bg-xclr3 text-black hover:text-xclr5 text-xl font-bold"
+            className="rounded-md mt-4 mb-2 w-32 h-12 bg-xclr5 hover:bg-xclr3 text-black text-xl font-bold"
           >
             submit
-          </button>
+          </button>}
+          
         </form>
-        <div className="mx-auto h-3/4  bg-xclr2 text-white mt-2 rounded-lg p-4 overflow-auto">
-          {loading ? <h2>loading...</h2> : <></>}
-          {contextData?.userChatData.map((data) => (
-            <p>
-              {data.q} {data.a}
+        <div className="mx-auto h-3/4  bg-xclr2 font-bold mt-2 rounded-lg p-4 text-black overflow-auto">
+                  {contextData?.userChatData.map((data,i) => (
+            <div key={i}>
+               <p className="bg-xclr3 rounded-lg p-2 inline">
+              {data.q}
             </p>
+            <ReactMarkdown className="bg-xclr4 rounded-lg p-2 my-2">{data.a}</ReactMarkdown>
+            </div>
+           
           ))}
-          {data ? <ReactMarkdown>{data}</ReactMarkdown> : <></>}
+          
         </div>
       </div>
     </>

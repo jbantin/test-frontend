@@ -93,13 +93,14 @@ const Signin = () => {
         {verify ? (
           <form
             onSubmit={submitPinHandler}
-            className="flex flex-col gap-3 w-[520px] m-auto mt-16 backdrop-blur rounded-lg border-[rgba(255,255,255,0.1)] border-2 shadow-2xl p-16"
+            className="flex flex-col gap-3 w-[580px] m-auto mt-16 backdrop-blur rounded-lg border-[rgba(255,255,255,0.1)] border-2 shadow-2xl p-16"
           >
             <h1 className="text-white">
-              please check your email inbox and verify!
-              <label htmlFor="pin">Enter code: </label>
+              please check your email inbox and</h1>
+              <div>
+              <label className="inline-block" htmlFor="pin">Enter code: </label>
               <input
-                className="text-black m-2 p-1 rounded-md w-14"
+                className="text-black m-2 p-1 rounded-md w-24 tracking-[0.6rem] items-center inline-block"
                 type="text"
                 name="pin"
                 id="pin"
@@ -108,6 +109,8 @@ const Signin = () => {
                   if (e.target.value.length <= 4) setPinValue(e.target.value);
                 }}
               />
+              </div>
+              
               <button
                 type="submit"
                 className="px-5 py-2 mt-8 bg-white text-black rounded-lg hover:bg-black hover:text-white"
@@ -115,7 +118,7 @@ const Signin = () => {
                 submit
               </button>
               <p className="text-xs text-red-500">{errorMsg}</p>
-            </h1>
+            
           </form>
         ) : (
           <form
