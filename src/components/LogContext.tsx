@@ -4,7 +4,10 @@ import React, {
   Dispatch,
   SetStateAction,
 } from "react";
-
+export type MyDataObjectType = {
+  q: string;
+  a: string;
+};
 export const LogContext = createContext<
   | {
       loggedIn: boolean;
@@ -15,6 +18,8 @@ export const LogContext = createContext<
       setSigningIn: Dispatch<SetStateAction<boolean>>;
       userName: string;
       setUserName: Dispatch<SetStateAction<string>>;
+      userChatData: Array<MyDataObjectType>;
+      setUserChatData: Dispatch<SetStateAction<Array<MyDataObjectType>>>;
       userEmail: string;
     }
   | undefined
@@ -25,6 +30,7 @@ export function LogContextProvider({ children }: React.PropsWithChildren<{}>) {
   const [authToken, setAuthToken] = useState("");
   const [signingIn, setSigningIn] = useState(false);
   const [userName, setUserName] = useState("");
+  const [userChatData, setUserChatData] = useState<Array<MyDataObjectType>>([]);
   const userEmail = "xxx@xxx.dev";
   const value = {
     loggedIn,
@@ -35,6 +41,8 @@ export function LogContextProvider({ children }: React.PropsWithChildren<{}>) {
     setSigningIn,
     userName,
     setUserName,
+    userChatData,
+    setUserChatData,
     userEmail,
   };
 

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { LogContext } from "./LogContext";
+import { MyDataObjectType } from "./LogContext";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const Login = () => {
@@ -22,10 +23,16 @@ const Login = () => {
         if (!response.ok) {
           throw new Error(`${await response.text()}`);
         }
-        const data: { token: string; name: string } = await response.json();
+        const data: {
+          token: string;
+          name: string;
+          data: Array<MyDataObjectType>;
+        } = await response.json();
         contextData?.setLoggedIn(true);
+        contextData?.setUserChatData(data.data);
         contextData?.setAuthToken(data.token);
         contextData?.setUserName(data.name);
+        console.log(data.data[0].a);
       } catch (error) {
         setErrorMsg(String(error));
       }
