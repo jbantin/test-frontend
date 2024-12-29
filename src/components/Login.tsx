@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { LogContext } from "./LogContext";
 import { MyDataObjectType } from "./LogContext";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
+console.log(backendUrl);
 const Login = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { LogContext } from "./LogContext";
 import ReactMarkdown from "react-markdown";
-import { MyDataObjectType } from "./LogContext";
+
 const Input = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [data, setData] = useState<string | null>(null);
