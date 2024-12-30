@@ -30,18 +30,15 @@ const Input = () => {
         a: newData,
       };
       contextData?.userChatData.push(newChatDate);
-      await fetch(
-        "https://express-backend-delta.vercel.app/update_data",
-        {
-          headers: { "content-type": "application/json" },
-          method: "POST",
-          body: JSON.stringify({
-            data: contextData?.userChatData,
-            token: contextData?.authToken,
-          }),
-        }
-      );
-          setLoading(false);
+      await fetch("https://express-backend-delta.vercel.app/update_data", {
+        headers: { "content-type": "application/json" },
+        method: "POST",
+        body: JSON.stringify({
+          data: contextData?.userChatData,
+          token: contextData?.authToken,
+        }),
+      });
+      setLoading(false);
     };
     fetchPrompt(inputValue);
     return;
@@ -50,19 +47,24 @@ const Input = () => {
     <>
       <div className=" w-full h-screen bg-black px-2 sm:px-12 md:px-24 xl:px-48">
         <div className="text-1xl sm:text-2xl md:text-3xl xl:text-4xl flex justify-between">
-          <h1 className="font-bold py-4 text-white">AskOhMatic</h1>
-          <h1 className="font-bold py-4 text-white">
+          <h1 className="font-bold py-4 text-white bg-xclr2 px-3 rounded-md my-2">
+            AskOhMatic
+          </h1>
+          <h1 className="font-bold py-4 text-white bg-xclr3 px-3 rounded-md my-2">
             Hey {contextData?.userName}
           </h1>
         </div>
 
         <form
           onSubmit={submitHandler}
-          className="form w-full  mx-auto flex flex-col bg-black rounded-md"
+          className="form w-full  mx-auto flex flex-col bg-xclr1 rounded-md  px-8"
         >
-          <h2 className="text-2xl font-bold text-white"> Enter Question</h2>
+          <h2 className="text-2xl font-bold text-white  py-2 px-2">
+            {" "}
+            Enter Question :
+          </h2>
           <input
-            className="w-[80%] rounded-md p-3 mt-1  bg-xclr4 text-black focus:outline-none"
+            className="w-[80%] rounded-md p-3 mt-1  bg-xclr4 text-black focus:outline-none shadow-gray-700 shadow-lg"
             type="text"
             id="inputText"
             value={inputValue}
@@ -71,25 +73,30 @@ const Input = () => {
             }}
             placeholder="ask something"
           />
-          {loading?<button className="rounded-md mt-4 mb-2 w-32 h-12 bg-xclr5 text-black text-xl font-bold">Loading...</button>:<button
-            type="submit"
-            className="rounded-md mt-4 mb-2 w-32 h-12 bg-xclr5 hover:bg-xclr3 text-black text-xl font-bold"
-          >
-            submit
-          </button>}
-          
+          {loading ? (
+            <button className="rounded-md mt-4 mb-2 w-32 h-12 bg-xclr5 text-black text-xl font-bold shadow-gray-700 shadow-lg">
+              Loading...
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="rounded-md mt-4 mb-2 w-32 h-12 bg-xclr5 hover:bg-xclr3 text-white text-xl font-bold shadow-gray-700 shadow-lg"
+            >
+              submit
+            </button>
+          )}
         </form>
-        <div className="mx-auto h-3/4  bg-xclr2 font-bold mt-2 rounded-lg p-4 text-black overflow-auto">
-                  {contextData?.userChatData.map((data,i) => (
+        <div className="mx-auto h-[70%]  bg-xclr1 font-bold mt-4 rounded-lg p-8 text-black overflow-auto">
+          {contextData?.userChatData.map((data, i) => (
             <div key={i}>
-               <p className="bg-xclr3 rounded-lg p-2 inline">
-              {data.q}
-            </p>
-            <ReactMarkdown className="bg-xclr4 rounded-lg p-2 my-2">{data.a}</ReactMarkdown>
+              <p className="bg-xclr3 rounded-lg p-2 inline shadow-gray-700 shadow-lg">
+                {data.q}
+              </p>
+              <ReactMarkdown className="bg-xclr4 rounded-lg p-2 my-4 shadow-gray-700 shadow-lg ">
+                {data.a}
+              </ReactMarkdown>
             </div>
-           
           ))}
-          
         </div>
       </div>
     </>
