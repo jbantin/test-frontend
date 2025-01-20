@@ -64,7 +64,7 @@ const Input = () => {
             Enter Question :
           </h2>
           <input
-            className="w-[80%] rounded-md p-3 mt-1  bg-xclr4 text-black focus:outline-none shadow-gray-700 shadow-lg"
+            className="w-[80%] rounded-md p-3 mt-1  bg-xclr4 text-black focus:outline-none shadow-black shadow-lg"
             type="text"
             id="inputText"
             value={inputValue}
@@ -80,19 +80,19 @@ const Input = () => {
           ) : (
             <button
               type="submit"
-              className="rounded-md mt-4 mb-2 w-32 h-12 bg-xclr5 hover:bg-xclr3 text-white text-xl font-bold shadow-gray-700 shadow-lg"
+              className="rounded-md mt-4 mb-2 w-32 h-12 bg-xclr5 hover:bg-xclr3 text-white text-xl font-bold shadow-black shadow-lg"
             >
               submit
             </button>
           )}
         </form>
-        <div className="mx-auto h-[70%]  bg-xclr1 font-bold mt-4 rounded-lg p-8 text-black overflow-auto">
+        <div className="mx-auto h-[70%]  bg-xclr1 font-bold mt-4 rounded-lg p-8 text-white overflow-auto">
           {contextData?.userChatData.map((data, i) => (
             <div key={i}>
-              <p className="bg-xclr3 rounded-lg p-2 inline shadow-gray-700 shadow-lg">
+              <p className="bg-xclr3 rounded-lg p-2 inline shadow-black shadow-lg">
                 {data.q}
               </p>
-              <ReactMarkdown className="bg-xclr4 rounded-lg p-2 my-4 shadow-gray-700 shadow-lg ">
+              <ReactMarkdown className="bg-xclr4 rounded-lg p-2 my-4 shadow-black shadow-lg ">
                 {data.a}
               </ReactMarkdown>
             </div>
