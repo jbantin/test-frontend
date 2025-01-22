@@ -64,7 +64,7 @@ const Input = () => {
             Enter Question :
           </h2>
           <input
-            className="w-[80%] rounded-md p-3 mt-1  bg-xclr4 text-black focus:outline-none shadow-black shadow-lg"
+            className="w-[80%] rounded-md p-3 mt-1  bg-xclr4 text-white focus:outline-none shadow-black shadow-lg"
             type="text"
             id="inputText"
             value={inputValue}
