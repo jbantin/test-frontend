@@ -47,17 +47,17 @@ const Input = () => {
     <>
       <div className=" w-full h-screen bg-black px-2 sm:px-12 md:px-24 xl:px-48">
         <div className="text-1xl sm:text-2xl md:text-3xl xl:text-4xl flex justify-between">
-          <h1 className="font-bold py-4 text-white bg-xclr2 px-3 rounded-md my-2">
+          <h1 className="font-bold py-2 text-white bg-black px-3 rounded-md my-2 border border-2 border-xclr3">
             AskOhMatic
           </h1>
-          <h1 className="font-bold py-4 text-white bg-xclr3 px-3 rounded-md my-2">
+          <h1 className="font-bold py-2 text-white bg-black px-3 rounded-md my-2 border border-2 border-xclr3">
             Hey {contextData?.userName}
           </h1>
         </div>
 
         <form
           onSubmit={submitHandler}
-          className="form w-full  mx-auto flex flex-col bg-xclr1 rounded-md  px-8"
+          className="form w-full  mx-auto flex flex-col bg-xclr1 rounded-md  px-8 border border-xclr3 border-2"
         >
           <h2 className="text-2xl font-bold text-white  py-2 px-2">
             {" "}
@@ -86,7 +86,7 @@ const Input = () => {
             </button>
           )}
         </form>
-        <div className="mx-auto h-[70%]  bg-xclr1 font-bold mt-4 rounded-lg p-8 text-white overflow-auto">
+        <div className="mx-auto h-[70%]  bg-xclr1 font-bold mt-4 rounded-lg p-8 text-white overflow-auto border border-xclr3 border-2">
           {contextData?.userChatData.map((data, i) => (
             <div key={i}>
               <p className="bg-xclr3 rounded-lg p-2 inline shadow-black shadow-lg">

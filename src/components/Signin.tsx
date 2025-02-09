@@ -89,18 +89,19 @@ const Signin = () => {
   };
   return (
     <div>
-      <div className="z-20 w-full h-full absolute  mt-2 text-xl font-semibold p-12 bg-[rgba(255,255,255,0.13)] ] shadow-2xl backdrop-blur">
+      <div className="z-20 w-full h-full absolute  mt-2 text-xl font-semibold p-12 backdrop-blur">
         {verify ? (
           <form
             onSubmit={submitPinHandler}
-            className="flex flex-col gap-3 w-[580px] m-auto mt-16 backdrop-blur rounded-lg border-[rgba(255,255,255,0.1)] border-2 shadow-2xl p-16"
+            className="flex flex-col gap-3 w-[520px] m-auto mt-16 backdrop-blur rounded-lg border-xclr3 border-2 shadow-2xl p-16"
           >
-            <h1 className="text-white">
-              please check your email inbox and</h1>
-              <div>
-              <label className="inline-block" htmlFor="pin">Enter code: </label>
+            <h1 className="text-white">please check your email inbox and</h1>
+            <div>
+              <label className="inline-block text-white" htmlFor="pin">
+                Enter code:{" "}
+              </label>
               <input
-                className="text-black m-2 p-1 rounded-md w-24 tracking-[0.6rem] items-center inline-block"
+                className="text-white bg-black m-2 p-1 rounded-md w-24 tracking-[0.6rem] items-center inline-block"
                 type="text"
                 name="pin"
                 id="pin"
@@ -109,28 +110,27 @@ const Signin = () => {
                   if (e.target.value.length <= 4) setPinValue(e.target.value);
                 }}
               />
-              </div>
-              
-              <button
-                type="submit"
-                className="px-5 py-2 mt-8 bg-white text-black rounded-lg hover:bg-black hover:text-white"
-              >
-                submit
-              </button>
-              <p className="text-xs text-red-500">{errorMsg}</p>
-            
+            </div>
+
+            <button
+              type="submit"
+              className="px-5 py-2 mt-8 bg-white text-black rounded-lg hover:bg-black hover:text-white"
+            >
+              submit
+            </button>
+            <p className="text-xs text-red-500">{errorMsg}</p>
           </form>
         ) : (
           <form
             onSubmit={submitHandler}
-            className="flex flex-col gap-3 w-[520px] m-auto mt-16 backdrop-blur rounded-lg border-[rgba(255,255,255,0.1)] border-2 shadow-2xl p-16"
+            className="flex flex-col gap-3 w-[520px] m-auto mt-16 backdrop-blur rounded-lg border-xclr3 border-2 shadow-2xl p-16"
           >
             <h3 className="ml-auto mr-auto text-4xl text-white">SignIn</h3>
             <label className="mt-8 text-white" htmlFor="name">
               Name
             </label>
             <input
-              className="border-solid border w-full p-2 rounded-md outline-none bg-white"
+              className="border-solid border w-full p-2 rounded-md outline-none text-white bg-black"
               type="text"
               value={nameValue}
               onChange={(e) => setNameValue(e.target.value)}
@@ -141,7 +141,7 @@ const Signin = () => {
               Email
             </label>
             <input
-              className="border-solid border w-full p-2 rounded-md outline-none bg-white"
+              className="border-solid border w-full p-2 rounded-md outline-none text-white bg-black"
               type="email"
               value={emailValue}
               onChange={(e) => setEmailValue(e.target.value)}
@@ -157,7 +157,7 @@ const Signin = () => {
               onChange={(e) => setPasswordValue(e.target.value)}
               placeholder="password"
               id="password"
-              className="border-solid border w-full p-2 rounded-md outline-none bg-white"
+              className="border-solid border w-full p-2 rounded-md outline-none text-white bg-black"
             />
             <label className="text-white" htmlFor="password2">
               repeat password
@@ -168,7 +168,7 @@ const Signin = () => {
               onChange={(e) => setPassword2Value(e.target.value)}
               placeholder="password"
               id="password2"
-              className="border-solid border w-full p-2 rounded-md outline-none bg-white"
+              className="border-solid border w-full p-2 rounded-md outline-none text-white bg-black"
             />
             {password2Value === passwordValue ? (
               <></>
