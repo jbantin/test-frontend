@@ -49,21 +49,26 @@ const Login = () => {
       <div className="z-20 w-full h-full absolute  mt-2 text-xl font-semibold p-12 backdrop-blur">
         <form
           onSubmit={submitHandler}
-          className="flex flex-col gap-3 w-[520px] m-auto mt-16 backdrop-blur rounded-lg border-xclr3 border-2 shadow-2xl p-16"
+          className="flex flex-col gap-3 w-[99%] md:w-[520px] m-auto mt-16 backdrop-blur rounded-lg border-xclr3 border-2 shadow-2xl p-16"
         >
-          <h3 className="ml-auto mr-auto text-4xl text-white">Login</h3>
-          <label className="mt-8 text-white" htmlFor="email">
+          <h3 className="ml-auto mr-auto text-2xl md:text-4xl text-white">
+            Login
+          </h3>
+          <label className="mt-8 text-sm md:text-lg text-white" htmlFor="email">
             Email
           </label>
           <input
-            className="border-solid border w-full p-2 rounded-md outline-none bg-black text-white"
+            className="border-solid border  text-sm md:text-lg w-full p-2 rounded-md outline-none bg-black text-white"
             type="email"
             value={emailValue}
             onChange={(e) => setEmailValue(e.target.value)}
             placeholder="email"
             id="email"
           />
-          <label className="mt-8 text-white" htmlFor="password">
+          <label
+            className="mt-8 text-sm md:text-lg text-white"
+            htmlFor="password"
+          >
             Password
           </label>
           <input
@@ -72,10 +77,10 @@ const Login = () => {
             onChange={(e) => setPasswordValue(e.target.value)}
             placeholder="password"
             id="password"
-            className="border-solid border w-full p-2 rounded-md outline-none bg-black text-white"
+            className="border-solid  text-sm md:text-lg border w-full p-2 rounded-md outline-none bg-black text-white"
           />
           <button
-            className="  p-5 mt-8 bg-black text-white rounded-lg hover:bg-slate-300 hover:text-black "
+            className="  p-5 mt-8 bg-black text-sm md:text-lg  text-white rounded-lg hover:bg-slate-300 hover:text-black "
             type="submit"
           >
             Log in
@@ -83,7 +88,7 @@ const Login = () => {
           <p className="text-xs text-red-500">{errorMsg}</p>
           <button
             onClick={() => contextData?.setSigningIn(true)}
-            className="block w-28 rounded-lg text-white hover:text-black hover:bg-xclr3 mr-0 ml-auto"
+            className="block w-28  text-sm md:text-lg rounded-lg text-white hover:text-black hover:bg-xclr3 mr-0 ml-auto"
           >
             ...or signIn.
           </button>

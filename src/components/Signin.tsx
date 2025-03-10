@@ -89,11 +89,11 @@ const Signin = () => {
   };
   return (
     <div>
-      <div className="z-20 w-full h-full absolute  mt-2 text-xl font-semibold p-12 backdrop-blur">
+      <div className="z-20 w-full h-full text-sm md:text-lg absolute  mt-2 text-xl font-semibold p-12 backdrop-blur">
         {verify ? (
           <form
             onSubmit={submitPinHandler}
-            className="flex flex-col gap-3 w-[520px] m-auto mt-16 backdrop-blur rounded-lg border-xclr3 border-2 shadow-2xl p-16"
+            className="flex flex-col gap-3 w-[99%] md:w-[520px] m-auto mt-16 backdrop-blur rounded-lg border-xclr3 border-2 shadow-2xl p-16"
           >
             <h1 className="text-white">please check your email inbox and</h1>
             <div>
